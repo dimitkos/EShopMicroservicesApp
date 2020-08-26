@@ -12,6 +12,6 @@ namespace Catalog.API.Repositories.Interafces
         Task<IEnumerable<Product>> GetProductByCategory(string categoryName);
         Task Create(Product product);
         Task<bool> Update(Product product);
-        Task<bool> Delete(Product product);
+        Task<bool> Delete(string id);
     }
 }
