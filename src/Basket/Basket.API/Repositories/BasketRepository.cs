@@ -19,8 +19,9 @@ namespace Basket.API.Repositories
         {
             var basket = await _context.Redis.StringGetAsync(username);
 
+            //i want to send an empty basket if it is not exists
             if (basket.IsNullOrEmpty)
-                return null;
+                return new BasketCart(username);
 
             return JsonConvert.DeserializeObject<BasketCart>(basket);
         }

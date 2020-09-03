@@ -23,8 +23,7 @@ namespace Basket.API.Controllers
         {
             var basket = await _repository.GetBasket(username);
 
-            //i want to send an empty basket if it is not exists
-            return Ok(basket ?? new BasketCart(username));
+            return Ok(basket);
         }
 
         [HttpPost]
