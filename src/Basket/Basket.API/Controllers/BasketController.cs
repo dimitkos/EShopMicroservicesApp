@@ -18,16 +18,13 @@ namespace Basket.API.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(BasketCart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<BasketCart>> GetBasket(string username)
         {
             var basket = await _repository.GetBasket(username);
 
-            if (basket == null)
-                return NotFound();
-
-            return Ok(basket);
+            //i want to send an empty basket if it is not exists
+            return Ok(basket ?? new BasketCart(username));
         }
 
         [HttpPost]
