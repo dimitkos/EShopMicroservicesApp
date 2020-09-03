@@ -44,7 +44,7 @@ namespace Basket.API.Controllers
             if (!deletedBasket)
                 return NotFound();
 
-            return Ok();
+            return Ok(deletedBasket);
         }
     }
 }
