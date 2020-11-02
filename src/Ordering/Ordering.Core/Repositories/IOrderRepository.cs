@@ -8,6 +8,6 @@ namespace Ordering.Core.Repositories
     public interface IOrderRepository : IRepository<Order>
     {
         //here can add custom methods
-        Task<IEnumerable<Order>> GetOrderByUsername(string username);
+        Task<IEnumerable<Order>> GetOrdersByUsername(string username);
     }
 }
