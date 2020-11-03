@@ -1,10 +1,18 @@
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ordering.Application.Handlers;
+using Ordering.Core.Repositories;
+using Ordering.Core.Repositories.Base;
 using Ordering.Infrastructure.Data;
+using Ordering.Infrastructure.Repositories;
+using Ordering.Infrastructure.Repositories.Base;
+using System.Reflection;
 
 namespace Ordering.API
 {
@@ -21,8 +29,16 @@ namespace Ordering.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<OrderContext>(options => 
+
+            services.AddDbContext<OrderContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));//in this tutorial add lifetime singleton but it is bad practice..
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
+
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
