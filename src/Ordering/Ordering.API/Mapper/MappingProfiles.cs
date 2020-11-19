@@ -3,7 +3,7 @@ using Ordering.Application.Commands;
 using Ordering.Application.Responses;
 using Ordering.Core.Entities;
 
-namespace Ordering.Application.Mapper
+namespace Ordering.API.Mapper
 {
     public class MappingProfiles : Profile
     {
