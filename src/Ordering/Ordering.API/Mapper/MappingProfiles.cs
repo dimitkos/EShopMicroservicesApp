@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EventBusRabbitMQ.Events;
 using Ordering.Application.Commands;
 using Ordering.Application.Responses;
 using Ordering.Core.Entities;
@@ -11,6 +12,7 @@ namespace Ordering.API.Mapper
         {
             CreateMap<Order, OrderResponse>().ReverseMap();
             CreateMap<CheckoutOrderCommand, Order>();
+            CreateMap<BasketCheckoutEvent, CheckoutOrderCommand>().ReverseMap();
         }
     }
 }
