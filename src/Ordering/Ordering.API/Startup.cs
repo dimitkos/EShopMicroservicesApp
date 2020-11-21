@@ -1,6 +1,5 @@
 using AutoMapper;
 using EventBusRabbitMQ;
-using EventBusRabbitMQ.Producer;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +36,7 @@ namespace Ordering.API
             services.AddControllers();
 
             services.AddDbContext<OrderContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));//in this tutorial add lifetime singleton but it is bad practice..           
+                options.UseSqlServer(Configuration.GetConnectionString("OrderConnection")), ServiceLifetime.Singleton);//in this tutorial add lifetime singleton but it is bad practice..           
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
